@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>中国古代建筑成就 - 仪表盘详情页</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 左侧导航栏 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>🏯 中国古代建筑</h2>
+                <p>时空可视化仪表盘</p>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-section="history">
+                    <i class="fas fa-history"></i>
+                    <span>历史长河</span>
+                </li>
+                <li class="nav-item" data-section="technology">
+                    <i class="fas fa-cogs"></i>
+                    <span>核心结构与技术</span>
+                </li>
+                <li class="nav-item" data-section="layout">
+                    <i class="fas fa-map"></i>
+                    <span>布局与规制</span>
+                </li>
+                <li class="nav-item" data-section="3d-models">
+                    <i class="fas fa-cube"></i>
+                    <span>3D建筑效果展示</span>
+                </li>
+                <li class="nav-item" data-section="achievements">
+                    <i class="fas fa-trophy"></i>
+                    <span>成就总结</span>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <p>© 2026 中国古代建筑可视化项目</p>
+            </div>
+        </nav>
+
+        <!-- 右侧内容区 -->
+        <main class="content">
+            <!-- 顶部状态栏 -->
+            <header class="content-header">
+                <h1 id="section-title">主要建筑类型</h1>
+                <div class="header-actions">
+                    <button class="btn-primary" onclick="refreshDashboard()">
+                        <i class="fas fa-sync-alt"></i> 刷新数据
+                    </button>
+                </div>
+            </header>
+
+            <!-- 内容区域 -->
+            <div class="content-body">
+
+
+                <!-- 历史长河 -->
+                <section id="history" class="section">
+                    <div class="section-content">
+                        <div class="card">
+                            <div id="techTrendChart" style="height: 400px;"></div>
+                        </div>
+                        
+                        <div class="timeline-container" id="history-timeline">
+                            <!-- 历史时期将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 核心结构与技术 -->
+                <section id="technology" class="section">
+                    <div class="section-content">
+                        <div class="grid grid-cols-2">
+                            <div class="card">
+                                <div id="techTimelineChart" style="height: 400px;"></div>
+                            </div>
+                            <div class="card">
+                                <div id="techDistributionChart" style="height: 400px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-grid">
+                            <div class="tech-card" data-tech="wood-frame">
+                                <button class="play-audio-btn" onclick="playAudio('wood-frame')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>木构架体系</h4>
+                                <p>中国古代建筑的核心结构，以木材为主要材料 <span style="font-size: 1.2em;">🪵</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">小故事：原始人类利用天然木材搭建简单的居住结构，这是木构架体系的萌芽。</small></p>
+
+                            </div>
+                            <div class="tech-card" data-tech="dougong">
+                                <button class="play-audio-btn" onclick="playAudio('dougong')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>斗拱</h4>
+                                <p>中国古代建筑特有的结构构件，兼具结构和装饰功能 <span style="font-size: 1.2em;">🔧</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">案例：唐代的斗拱尺寸宏大，结构作用明显，体现了斗拱技术的成熟。</small></p>
+
+                            </div>
+                            <div class="tech-card" data-tech="sunmao">
+                                <button class="play-audio-btn" onclick="playAudio('sunmao')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>榫卯</h4>
+                                <p>中国传统木工技艺，不用钉子的连接方式 <span style="font-size: 1.2em;">🔗</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">小故事：应县木塔全塔不用一钉一铆，完全依靠榫卯连接。</small></p>
+
+                            </div>
+                            <div class="tech-card" data-tech="brick-tile">
+                                <button class="play-audio-btn" onclick="playAudio('brick-tile')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>砖瓦技术</h4>
+                                <p>中国古代建筑的重要材料技术 <span style="font-size: 1.2em;">🧱</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">案例：紫禁城的屋顶使用了大量的琉璃瓦，色彩鲜艳，装饰精美。</small></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 布局与规制 -->
+                <section id="layout" class="section">
+                    <div class="section-content">
+                        <div class="grid grid-cols-2">
+                            <div class="card">
+                                <div id="layoutPlanChart" style="height: 400px;"></div>
+                            </div>
+                            <div class="card">
+                                <div id="layoutLevelChart" style="height: 400px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="layout-grid">
+                            <div class="layout-card" data-layout="axis-symmetry">
+                                <button class="play-audio-btn" onclick="playAudio('axis-symmetry')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>中轴对称</h4>
+                                <p>中国古代建筑的重要布局原则，体现等级制度 <span style="font-size: 1.2em;">⚖️</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">小故事：二里头遗址的宫殿基址是中国最早的宫殿遗址之一，已经出现了明确的中轴线布局。</small></p>
+
+                            </div>
+                            <div class="layout-card" data-layout="hierarchy">
+                                <button class="play-audio-btn" onclick="playAudio('hierarchy')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>等级制度</h4>
+                                <p>建筑规制体现社会等级，严格遵循礼制 <span style="font-size: 1.2em;">👑</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">案例：《考工记》中对不同等级建筑的规模和装饰有明确规定。</small></p>
+
+                            </div>
+                            <div class="layout-card" data-layout="courtyard">
+                                <button class="play-audio-btn" onclick="playAudio('courtyard')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>庭院空间</h4>
+                                <p>中国古代建筑的基本单元，体现人与自然的和谐 <span style="font-size: 1.2em;">🌿</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">小故事：北京四合院是中国传统庭院空间的典型代表，体现了家族聚居的生活方式。</small></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3D建筑效果展示 -->
+                <section id="3d-models" class="section">
+                    <div class="section-content">
+                        <div class="grid grid-cols-3">
+                            <div class="card">
+                                <h3>模型选择</h3>
+                                <div class="model-selector">
+                                    <select id="model-select" onchange="loadSelectedModel()">
+                                        <option value="">-- 选择3D模型 --</option>
+                                        <option value="models/fujiantulou.glb">福建土楼</option>
+                                        <option value="models/gongqiao.glb">拱桥</option>
+                                        <option value="models/siheyuan.glb">四合院</option>
+                                        <option value="models/taihedian.glb">太和殿</option>
+                                    </select>
+                                    <button class="btn-secondary" onclick="refreshModelList()">
+                                        <i class="fas fa-sync-alt"></i> 刷新模型
+                                    </button>
+                                </div>
+                                <div class="model-info">
+                                    <h4>模型信息</h4>
+                                    <p id="model-info-text">请选择一个3D模型查看详细信息</p>
+                                </div>
+                            </div>
+                            <div class="card col-span-2">
+                                <h3>3D模型展示</h3>
+                                <div id="building3D" style="height: 400px;"></div>
+                                <div class="model-controls">
+                                    <button class="btn-secondary" onclick="resetCamera()">
+                                        <i class="fas fa-sync-alt"></i> 重置视角
+                                    </button>
+                                    <button class="btn-secondary" onclick="toggleFullscreen()">
+                                        <i class="fas fa-expand"></i> 全屏
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 成就总结 -->
+                <section id="achievements" class="section">
+                    <div class="section-content">
+                        <div class="grid grid-cols-2">
+                            <div class="card">
+                                <div id="achievementRadarChart" style="height: 400px;"></div>
+                            </div>
+                            <div class="card">
+                                <div id="achievementContributionChart" style="height: 400px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-grid">
+                            <div class="achievement-card" data-achievement="structural">
+                                <button class="play-audio-btn" onclick="playAudio('structural')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>结构成就</h4>
+                                <p>木构架体系的高度成熟，抗震性能优异，千年建筑至今屹立 <span style="font-size: 1.2em;">🏗️</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">案例：佛光寺东大殿是中国现存最早的木结构建筑之一，体现了唐代木构架技术的高超水平。</small></p>
+
+                            </div>
+                            <div class="achievement-card" data-achievement="artistic">
+                                <button class="play-audio-btn" onclick="playAudio('artistic')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>艺术成就</h4>
+                                <p>建筑与自然环境的和谐统一，雕刻、彩画等装饰艺术的高度发展 <span style="font-size: 1.2em;">🎨</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">小故事：苏州园林通过巧妙的布局，将建筑与自然景观融为一体，创造出“虽由人作，宛自天开”的意境。</small></p>
+
+                            </div>
+                            <div class="achievement-card" data-achievement="technical">
+                                <button class="play-audio-btn" onclick="playAudio('technical')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>技术成就</h4>
+                                <p>《营造法式》等建筑专著的出现，标准化施工方法的建立 <span style="font-size: 1.2em;">📚</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">案例：宋代李诫编写的《营造法式》是中国古代建筑技术的重要专著，对后世建筑产生了深远影响。</small></p>
+
+                            </div>
+                            <div class="achievement-card" data-achievement="cultural">
+                                <button class="play-audio-btn" onclick="playAudio('cultural')">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <h4>文化价值</h4>
+                                <p>建筑作为文化载体，体现中国传统哲学、礼制思想和审美观念 <span style="font-size: 1.2em;">🌟</span><br>
+                                <small style="color: #666; font-size: 0.9em; font-family: '黑体', Arial, sans-serif;">小故事：紫禁城的布局体现了中国传统的“居中为尊”思想，是中国传统文化的重要载体。</small></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- 详情模态框 -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">详情</h2>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- 建筑图片查看模态框 -->
+    <div id="building-modal" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <span class="close">&times;</span>
+            <h2 id="building-title">建筑详情</h2>
+            <div class="building-modal-content">
+                <div class="building-image-container">
+                    <img id="building-image" src="" alt="建筑图片" style="max-width: 100%; max-height: 500px; object-fit: contain;">
+                    <div class="image-nav">
+                        <button id="prev-image" class="btn-secondary">上一张</button>
+                        <button id="next-image" class="btn-secondary">下一张</button>
+                    </div>
+                </div>
+                <div class="building-description">
+                    <h3 id="building-name"></h3>
+                    <p id="building-description-text"></p>
+                    <p id="building-period"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data/history-data.js"></script>
+    <script src="js/threejs-init.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

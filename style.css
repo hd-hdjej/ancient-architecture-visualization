@@ -1,0 +1,278 @@
+/* 中国古代建筑结构可视化 - 样式表 */
+
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* 容器 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+/* 头部 */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #c0392b;
+}
+
+h1 {
+    color: #c0392b;
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+/* 图表容器 */
+.chart-container {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.chart-title {
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 4px solid #c0392b;
+}
+
+.chart-box {
+    width: 100%;
+    height: 450px;
+    background: white;
+    border-radius: 6px;
+}
+
+/* 数据表格 */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table th {
+    background: #c0392b;
+    color: white;
+    font-weight: 600;
+}
+
+.data-table tr:hover {
+    background: #f5f5f5;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 说明区域 */
+.description {
+    background: #fff9e6;
+    border-left: 4px solid #f39c12;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.description h3 {
+    color: #f39c12;
+    margin-bottom: 10px;
+}
+
+/* 引用 */
+blockquote {
+    margin: 20px 0;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-left: 5px solid #6c757d;
+    font-style: italic;
+    color: #555;
+    border-radius: 0 8px 8px 0;
+}
+
+/* 按钮 */
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #c0392b;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btn:hover {
+    background: #a93226;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
+}
+
+.btn-secondary {
+    background: #3498db;
+}
+
+.btn-secondary:hover {
+    background: #2980b9;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .chart-box {
+        height: 350px;
+    }
+
+    .data-table {
+        font-size: 0.9em;
+    }
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* 加载动画 */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    font-size: 1.2em;
+    color: #666;
+}
+
+.loading::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #c0392b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 高亮文本 */
+.highlight {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* 代码块 */
+pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    margin: 15px 0;
+}
+
+code {
+    background: #f4f4f4;
+    color: #c0392b;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+/* 提示框 */
+.tip {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+
+.tip strong {
+    color: #0c5460;
+}
+
+/* 警告框 */
+.warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+
+.warning strong {
+    color: #856404;
+}
